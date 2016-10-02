@@ -36,3 +36,4 @@ var new_ninja = {
 for (var key in new_ninja){
 	console.log(key, new_ninja[key]);
 }
+
