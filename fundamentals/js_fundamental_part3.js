@@ -6,20 +6,20 @@ var person = {
 		console.log(person.name);
 	},
 	say_something: function(arg){
-		console.log('${person.name} says ${arg}');
+		console.log(`${person.name} says ${arg}`);
 	},
 	walk: function(){
-		console.log('${person.name} is walking');
+		console.log(`${person.name} is walking`);
 		person.distance_traveled += 3
 		return person
 	},
 	run: function(){
-		console.log('${person.name} is running');
+		console.log(`${person.name} is running`);
 		person.distance_traveled += 10
 		return person
 	},
 	crawl: function(){
-		console.log('${person.name} is crawling');
+		console.log(`${person.name} is crawling`);
 		person.distance_traveled += 1
 		return person
 	}

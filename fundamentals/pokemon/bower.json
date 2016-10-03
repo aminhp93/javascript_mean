@@ -1,0 +1,10 @@
+{
+  "name": "Pokemon Game",
+  "homepage": "https://github.com/aminhp93/javascript_mean",
+  "authors": [
+    "Minh Pham"
+  ],
+  "description": "Place for 2 players to play pokemon.",
+  "main": "main.js",
+  "license": "MIT"
+}

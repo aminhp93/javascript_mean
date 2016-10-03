@@ -3,37 +3,39 @@ function runningLogger(){
 }
 
 function multiplyByTen(num){
-	console.log(num * 10);
+	return num * 10;
 }
 multiplyByTen(5);
 
 function stringReturnOne(){
-	console.log('minh1');
+	return 'minh1';
 }
 
 function stringReturnTwo(){
-	console.log('minh2');
+	return 'minh2';
 }
 
 function caller(object){
 	if (typeof(object) == "function"){
-		console.log(object);
+		object();
 	}
 }
 
 function myDoubleConsoleLog(arg1, arg2){
 	if ((typeof(arg1) == 'function') && (typeof(arg2) == 'function')){
-		console.log(arg1, arg2);
+		console.log(arg1(), arg2());
 	}
 }
 
 function caller2(object){
 	console.log('starting');
-	setTimeout(2000);
-	if (typeof(object) == 'function'){
-		console.log(object);
-	}
+	var x = setTimeout(function(){
+		if (typeof(object) == 'function'){
+			object(stringReturnTwo, stringReturnOne);
+		}
+	}, 4000);
+	
 	console.log('ending');
 	return 'interesting'
 }
-caller2(myDoubleConsoleLog(caller, stringReturnTwo));
+caller2(myDoubleConsoleLog);
