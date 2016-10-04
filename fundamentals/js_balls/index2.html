@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Javascript Box -- OOP demo</title>
+
+</head>
+<body>
+	<svg id="svg" xmlns="http://www.w3.org/2000/svg"></svg>
+	<script type="text/javascript">
+		function Circle(x, y, r, element_id){
+			var randomNumberBetween = function(min, max){
+				return Math.random() * (max - min) + min;
+			}
+
+			var makeSVG = function(tag, attrs){
+				var svg_element = document.createElementNS('http://www.w3.org/2000/svg', tag);
+
+				for (var k in attrs){
+					svg_element.setAttribute(k, attrs[k]);
+				}
+				return svg_element;
+			}
+
+			this.info = {
+				x: x,
+				y: y,
+				r: r,
+				id: element_id
+			}
+
+			this.initialize = function(){
+				this.info.velocity = {
+					x: randomNumberBetween(-3, 3),
+					y: randomNumberBetween(-3, 3)
+				}
+
+				var circle = makeSVG('circle', {
+					cx: this.info.x,
+					cy: this.info.y,
+					r: this.info.r,
+					id: this.info.id,
+					fill: "#" + ((1<<24) * Math.random() | 0).toString(16)
+				})
+
+				document.getElementById('svg').appendChild(circle);
+			}
+
+			// function to update the circle's coordinates
+			this.update = function(time){
+				var circle_element = document.getElementById(this.info.id);
+
+				if (this.info.x + this.info.r > document.body.clientWidth){
+					this.info.x = document.body.clientWidth - this.info.r;
+					this.info.velocity.x *= -1;
+				} else if (this.info.x - this.info.r < 0){
+					this.info.x = this.info.r;
+					this.info.velocity.x *= -1;
+				} else if (this.info.y + this.info.r > document.body.clientHeight){
+					this.info.y = document.body.clientHeight - this.info.r;
+					this.info.velocity.y *= -1;
+			 	} else if (this.info.y - this.info.r < 0){
+			 		this.info.y = this.info.r;
+			 		this.info.velocity.y *= -1;		
+				} else {
+					this.info.x += this.info.velocity.x * time;
+					this.info.y += this.info.velocity.y * time;
+				}
+				circle_element.setAttribute('cx', this.info.x);
+				circle_element.setAttribute('cy', this.info.y);
+			}
+
+			this.initialize();
+		}
+
+		function PlayGround(){
+			var self = this;
+			var counter = 0;  
+			var circles = [];
+
+			// updating hte circle array
+			var setCirclesArray = function(new_array){
+				circles = new_array;
+			}
+
+			// detect collision
+			var detectCollision = function(circle1, circle2){
+				var dx = circle1.info.x - circle2.info.x;
+				var dy = circle1.info.y - circle2.info.y;
+				var distance = parseFloat(circle1.info.r + circle2.info.r);
+
+				return (Math.pow(dx, 2) + Math.pow(dy, 2) <= Math.pow(distance, 2));
+			}
+
+			var collide = function(circle, circles){
+				for (i in circles){
+					// filter so that the newly created circle is not included in the loop
+					if (i != circle.info.id){
+						// check collision
+						if (detectCollision(circle, circles[i]) == true){
+							// merge two circles that collided
+							self.mergeCircles(circle, circles[i], circles);
+						}
+					}
+				}
+			}
+
+			// update the circle's position on the screen
+			this.loop = function(){
+				for (circle in circles){
+					// update circle's position
+					circles[circle].update(1);
+					// detect collision
+					collide(circles[circle], circles);
+				}
+			}
+
+			this.createCircle = function(x, y, r){
+				var new_circle = new Circle(x, y, r, counter++);
+				circles.push(new_circle);
+			}
+
+			this.removeCirle = function(circle_id, circle_array){
+				// delete the circle from the array of circles
+				delete circle_array[circle_id];
+				// remove the circle from the svg element
+				var circle = document.getElementById('svg').getElementById(circle_id);
+				document.getElementById('svg').removeChild(circle);
+			}
+
+			this.mergeCircles = function(circle1, circle2, circles_array){
+				// update the radius of merged circle on the array
+				var new_circle_info = circle1.info;
+
+				new_circle_info.r = parseFloat(circle.info.r + circle.info.r);
+
+				var svg = document.getElementById('svg');
+
+				// change coordiantes and radius of merged circle on the array
+				circles[circle1.info.id].info.x = new_circle_info.x;
+				circles[circle1.info.id].info.y = new_circle_info.y;
+				circles[circle1.info.id].info.r = new_circle_info.r;
+				circles[circle1.info.id].info.velocity.x = new_circle_info.velocity.x;
+				circles[circle1.info.id].info.velocity.y = new_circle_info.velocity.y;
+
+				// change on svg element
+				svg.getElementById(circle1.info.id).setAttribute('x', new_circle_info.x);
+				svg.getElementById(circle1.info.id).setAttribute('y', new_circle_info.y);
+				svg.getElementById(circle1.info.id).setAttribute('r', new_circle_info.r);
+
+				self.removeCircle(circle2.info.id, circles_array);
+			}
+
+			this.createCircle(window.innerWidth/2, window.innerHeight/2, 5)
+		}
+
+		var playground = new PlayGround();
+		setInterval(playground.loop, 15);
+
+		function getTime(){
+			var date = new Date();
+			return date.getTime();
+		}
+
+		document.onmousedown = function(e){
+			mousedown_time = getTime();
+		}
+
+		document.onmouseup = function(e){
+			time_pressed = (getTime() - mousedown_time)/ 20;
+			playground.createCircle(e.x, e.y, time_pressed);
+		}
+
+
+	</script>
+</body>
+</html>
