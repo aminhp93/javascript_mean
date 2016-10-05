@@ -329,34 +329,34 @@
 // console.log(muffin.numLegs);
 
 
-function Ninja(name){
-	this.name = name;
-	this.distance_traveled = 0;
-}
+// function Ninja(name){
+// 	this.name = name;
+// 	this.distance_traveled = 0;
+// }
 
-Ninja.prototype.walk = function(){
-	console.log(this.name + ' is walking');
-	this.distance_traveled += 1;
-	return this;
-}
+// Ninja.prototype.walk = function(){
+// 	console.log(this.name + ' is walking');
+// 	this.distance_traveled += 1;
+// 	return this;
+// }
 
-Ninja.prototype.run = function(){
-	console.log(this.name + ' is running');
-	this.distance_traveled += 5;
-	this.displayDistanceTraveled();
-	return this;
-}
+// Ninja.prototype.run = function(){
+// 	console.log(this.name + ' is running');
+// 	this.distance_traveled += 5;
+// 	this.displayDistanceTraveled();
+// 	return this;
+// }
 
-Ninja.prototype.displayDistanceTraveled = function(){
-	console.log('distance_traveled: ', this.distance_traveled);
-}
+// Ninja.prototype.displayDistanceTraveled = function(){
+// 	console.log('distance_traveled: ', this.distance_traveled);
+// }
 
-ninja1 = new Ninja('Jay');
-ninja2 = new Ninja('Michael');
-ninja3 = new Ninja('Andrew');
+// ninja1 = new Ninja('Jay');
+// ninja2 = new Ninja('Michael');
+// ninja3 = new Ninja('Andrew');
 
-ninja1.walk().run().walk().run();
-console.log(ninja1);
+// ninja1.walk().run().walk().run();
+// console.log(ninja1);
 
 
 
