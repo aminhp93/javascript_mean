@@ -1,0 +1,89 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<title>Angular Intro</title>
+</head>
+<body>
+	<div id="fakeDirective">
+		Stuff Goes Here
+	</div>
+
+
+
+	<script src = '../bower_components/angular/angular.js'></script>
+	<script type="text/javascript">
+		function myFakeDirective(id){
+			var myLinkage = document.getElementById(id);
+			myLinkage.addWordToHTML = function(word){
+				myLinkage = word;
+			}
+			return myLinkage;
+		}
+		var doStuff = myFakeDirective('fakeDirective');
+		console.log(doStuff);
+		doStuff.addWordToHTML("look at that");
+		console.log(doStuff);
+	</script> -->
+
+
+<!-- 	<div id = 'fakeDirective'>
+	  Stuff Goes Here!
+	</div>
+
+	<script src = '../bower_components/angular/angular.js'></script>
+	<script type="text/javascript">
+		function myFakeDirective(id){
+		  var myLinkage = document.getElementById(id);
+		  myLinkage.addWordToHTML = function(word){
+		      myLinkage = word;
+		  }
+		  return myLinkage
+		}
+		var doStuff = myFakeDirective('fakeDirective');
+		console.log(doStuff);
+		doStuff.addWordToHTML('Look at that!');
+		console.log(doStuff);
+
+	</script> -->
+<!-- 
+
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Intro</title>
+	<script src = '../bower_components/angular/angular.js'></script>
+	<script type="text/javascript">
+		var app = angular.module('myapp', []);
+		app.directive("helloWorldIAm", function(){
+			return {
+				restrict: "AE",
+				replace: 'true',
+				template: "<p style='background-color:{{color}}'>Hello World",
+				link: function(scope, elem, attrs){
+					elem.bind('click', function(){
+						elem.css('background-color', 'white');
+						scope.$apply(function(){
+							scope.color = 'red';
+						})
+					})
+
+					elem.bind('mouseover', function(){
+						elem.css('cursor', 'pointer');
+						elem.css('background-color', 'blue');
+					})
+				}
+			}
+		})
+	</script>
+</head>
+<body ng-app = 'myapp'>
+	<hello-World-I-Am></hello-World-I-Am>
+	<div hello-World-I-Am></div>
+
+</body>
+</html>
