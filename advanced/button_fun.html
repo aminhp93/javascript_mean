@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Button Fun</title>
+	<style type="text/css">
+		.red{
+			background-color: red;
+		}
+		.blue{
+			background-color: blue;
+		}
+		.green{
+			background-color: green;
+		}
+	</style>
+</head>
+<body>
+	<button id="target" class="red">Click me</button>
+	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+	<script type="text/javascript">
+		$(document).on('click', 'button', function(){
+			$(this).toggleClass('blue');
+		})
+
+		$('button').hover(function(){
+			$(this).addClass('green')
+		}, function(){
+			$(this).removeClass('green')
+		})
+		
+
+	</script>
+
+
+	<!-- <script type="text/javascript">
+		var button = document.getElementById('target');
+		var x = 0;
+
+		button.addEventListener('click', toggleBlueAndRed);
+		button.addEventListener('mouseover', hoverGreen1);
+		button.addEventListener('mouseout', hoverGreen2);
+
+		function toggleBlueAndRed(){
+			if (x == 0){
+				button.className = 'blue';
+				x = 1
+			} else if (x == 1) {
+				button.className = 'red';
+				x = 0
+			}
+		}
+
+		function hoverGreen1(){
+			button.className += ' green';
+		}
+
+		function hoverGreen2(){
+			button.className -= ' green';
+		}
+
+	</script>
+ -->
+
+
+</body>
+</html>

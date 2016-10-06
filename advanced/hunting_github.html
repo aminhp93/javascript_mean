@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hunting Github</title>
+	<!-- <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script> -->
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+		
+			// $('form').on('submit', function(){
+			// 	var name = $('#input').val();
+			// 	$.get("https://api.github.com/users/" + name, function(res){
+			// 		output = '';
+			// 		output += '<div>Login as:' + res.login + '</div>'
+			// 		output += '<div>id as:' + res.id + '</div>'
+			// 		output += '<div>name as:' + res.name + '</div>'
+			// 		output += '<div>email as:' + res.email + '</div>'
+			// 		$('#result').html(output);
+			// 	}, 'json');
+			// 	return false;
+			// })
+
+			function display(res){
+				var name = $('#input').val();
+
+				$.get("https://api.github.com/users/" + name, function(res){
+
+					output = '';
+					output += '<div>Login as:' + res.login + '</div>'
+					output += '<div>id as:' + res.id + '</div>'
+					output += '<div>name as:' + res.name + '</div>'
+					output += '<div>email as:' + res.email + '</div>'
+					$('#result').html(output);
+				}, 'json');
+
+				return false;
+			}
+
+			$('form').on('submit', display);
+
+		})
+	</script>
+</head>
+<body>
+	<h2>Enter your github username to know more</h2>
+	<form>
+		<input id="input" type="text" name="username" placeholder="Enter your username here">
+		<input type="submit" value="Click me">
+	</form>
+	<div id="result"></div>
+</body>
+</html>

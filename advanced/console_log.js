@@ -87,75 +87,165 @@
 // console.log(makePasta('Farfalle', makeAlfredo));
 
 
-function leadBootcamp(language, leader){
-	var outcome = leader(language);
-	console.log(outcome);
+// function leadBootcamp(language, leader){
+// 	var outcome = leader(language);
+// 	console.log(outcome);
+// }
+
+// function Mike(language){
+// 	var languages = {
+// 		'javascript': 'successful leader',
+// 		'PHP': 'successful leader',
+// 		'Python': 'successful leader'
+// 	}
+
+// 	if (languages[language]){
+// 		return languages[language];
+// 	}
+// 	else {
+// 		return 'maybe not yet';
+// 	}
+// }
+
+// function Charlie(language){
+// 	var languages = {
+// 		'javascript': 'successful leader',
+// 		'PHP': 'successful leader',
+// 		'ruby': 'successful leader'
+// 	}
+
+// 	if (languages[language]){
+// 		return languages[language];
+// 	} else {
+// 		return 'maybe not yet';
+// 	}
+// }
+
+// function Jimmy(language){
+// 	var languages = {
+// 		'javascript': 'successful leader',
+// 		'PHP': 'successful leader',
+// 		'Python': 'successful leader'
+// 	}
+
+// 	if (languages[language]){
+// 		return languages[language];
+// 	} else {
+// 		return 'maybe';
+// 	}
+// }
+
+// leadBootcamp('ruby', Mike);
+// leadBootcamp('ruby', Jimmy);
+// leadBootcamp('ruby', Charlie);
+
+// function printResult(doSomething){
+// 	var result = doSomething();
+// 	console.log(result);
+// }
+// printResult(function returnFive(){
+// 	return 5;
+// })
+
+// function each(arr, callback){
+// 	for (var i = 0; i < arr.length; i++){
+// 		callback(arr[i]);
+// 	}
+// }
+
+// each([1,2,3], function(num){
+// 	console.log(num + " I am from the callback")
+// })
+
+// function getStuffFromDatabase(callback){
+// 	var data;
+// 	var myTimer = setInterval(function(){
+// 		if (typeof(callback) == "function"){
+// 			data = [{name: 'Todd'}, {name: 'Michael'}, {name: 'Portia'}];
+// 			callback(data);
+// 		}
+// 	}, 3000);
+// 	// return data;
+// }
+
+// function requestDataFromDatabase(){
+// 	var data = getStuffFromDatabase(function myCallback(amin){
+// 		console.log(amin, 'ASynchronous')
+// 		for (var i = 0; i < amin.length; i++){
+// 			console.log(amin[i].name);
+// 		}
+// 	});
+// 	console.log(data, "Synchoronous");
+// }
+
+// function requestDataFromDatabase2(){
+// 	var data = getStuffFromDatabase(function myCallback(amin){
+// 		console.log(amin, 'ASynchronous2')
+// 		for (var i = 0; i < amin.length; i++){
+// 			console.log(amin[i].name);
+// 		}
+// 	});
+// 	console.log(data, "Synchoronous2");
+// }
+
+// function catchFly(){
+// 	console.log("i just caught a fly");
+// }
+
+// requestDataFromDatabase();
+// requestDataFromDatabase2();
+
+// console.log("hello");
+// catchFly();
+
+function getStuffFromDatabase(resolve, reject){
+	var data = "whee";
+	setTimeout(function(){
+		// if (typeof(callback) == 'function'){
+			data = [{name: 'Todd'}, {name: 'Michael'}, {name: 'Portia'}];
+			resolve(data);
+		// }
+	}, 3000);
+	// reject();
+	// return data;
 }
 
-function Mike(language){
-	var languages = {
-		'javascript': 'successful leader',
-		'PHP': 'successful leader',
-		'Python': 'successful leader'
-	}
-
-	if (languages[language]){
-		return languages[language];
-	}
-	else {
-		return 'maybe not yet';
-	}
+function requestDataFromDatabase(){
+	console.log('running');
+	// create promise
+	var data = new Promise(function(resolve, reject){
+		getStuffFromDatabase(resolve, reject);
+	})
+	// if promise is successful
+	data.then(function(data1){
+		console.log(data1, "ASynchronous");
+		for (var i = 0; i < data1.length; i++){
+			console.log(data1[i].name);
+		}
+	})
+	data.catch(function(){
+		console.log('failure');
+	})
+	console.log('end');
 }
 
-function Charlie(language){
-	var languages = {
-		'javascript': 'successful leader',
-		'PHP': 'successful leader',
-		'ruby': 'successful leader'
-	}
+requestDataFromDatabase();
 
-	if (languages[language]){
-		return languages[language];
-	} else {
-		return 'maybe not yet';
-	}
-}
 
-function Jimmy(language){
-	var languages = {
-		'javascript': 'successful leader',
-		'PHP': 'successful leader',
-		'Python': 'successful leader'
-	}
 
-	if (languages[language]){
-		return languages[language];
-	} else {
-		return 'maybe';
-	}
-}
 
-leadBootcamp('ruby', Mike);
-leadBootcamp('ruby', Jimmy);
-leadBootcamp('ruby', Charlie);
 
-function printResult(doSomething){
-	var result = doSomething();
-	console.log(result);
-}
-printResult(function returnFive(){
-	return 5;
-})
 
-function each(arr, callback){
-	for (var i = 0; i < arr.length; i++){
-		callback(arr[i]);
-	}
-}
 
-each([1,2,3], function(num){
-	console.log(num + " I am from the callback")
-})
+
+
+
+
+
+
+
+
+
 
 
 

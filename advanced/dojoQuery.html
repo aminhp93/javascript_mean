@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dojo Query</title>
+	
+</head>
+<body>
+	<button id="1">Button 1</button>
+	<button id="2">Button 2</button>
+	<button id="3">Button 3</button>
+
+	<script type="text/javascript">
+		function Dojo(param){
+			// var button = document.getElementById(param);
+
+			// button.addEventListener('click', method1);
+		
+			// button.addEventListener('mouseover', method2);
+			// button.addEventListener('mouseout', method3);
+
+			// function method1(){
+			// 	console.log('The button was clicked');
+			// }
+
+			// function method2(){
+			// 	console.log('THe button was hovered on');
+			// }
+
+			// function method3(){
+			// 	console.log('THe button was hovered out');
+			// }
+
+			this.myId = document.getElementById(param);
+			this.click = function(callback){
+				this.myId.addEventListener('click', callback);
+			}
+
+			this.hover = function(hoverin, hoverout){
+				this.myId.addEventListener('mouseover', hoverin);
+				this.myId.addEventListener('mouseout', hoverout);
+			}
+
+			return this;
+
+		};
+		Dojo('1').click(function(){
+			console.log("The button was clicked");
+		})
+		Dojo('2').hover(function(){
+			console.log("the button was hovered on");
+		}, function(){
+			console.log("hovered out")
+		})
+
+
+	</script>
+</body>
+</html>
